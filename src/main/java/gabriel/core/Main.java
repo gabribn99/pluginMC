@@ -1,12 +1,12 @@
-package plugin.core;
+package gabriel.core;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import plugin.adapters.LocationAdapter;
-import plugin.commands.*;
-import plugin.entities.LocationBean;
-import plugin.entities.TPBean;
-import plugin.events.PlayerJoinQuit;
+import gabriel.adapters.LocationAdapter;
+import gabriel.commands.*;
+import gabriel.entities.LocationBean;
+import gabriel.entities.TPBean;
+import gabriel.events.PlayerJoinQuit;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.ConsoleCommandSender;

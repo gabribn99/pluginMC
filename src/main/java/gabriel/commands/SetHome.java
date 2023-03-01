@@ -1,7 +1,7 @@
-package plugin.commands;
+package gabriel.commands;
 
 import org.bukkit.ChatColor;
-import plugin.core.Main;
+import gabriel.core.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

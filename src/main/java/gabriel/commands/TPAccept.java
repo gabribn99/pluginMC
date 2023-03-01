@@ -1,8 +1,8 @@
-package plugin.commands;
+package gabriel.commands;
 
 import org.bukkit.ChatColor;
-import plugin.core.Main;
-import plugin.entities.TPBean;
+import gabriel.core.Main;
+import gabriel.entities.TPBean;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

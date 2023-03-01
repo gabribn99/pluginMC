@@ -1,0 +1,32 @@
+name: PruebaPlugin
+version: '${project.version}'
+main: gabriel.core.Main
+api-version: 1.19
+commands:
+  heal:
+    description: Con este comando recuperas todos los puntos de vida y comida
+    usage: /<command>
+    aliases:
+      - curar
+      - gabri
+  tpm:
+    description: Con este comando te teletransportas a otro jugador
+    usage: /<command>
+  tpa:
+    description: Con este comando pides teletransportarte a otro jugador
+    usage: /<command>
+  tpaccept:
+    description: Con este comando aceptas una peticion de teletransporte de otro jugador
+    usage: /<command>
+  tpdeny:
+    description: Con este comando rechazas una peticion de teletransporte de otro jugador
+    usage: /<command>
+  sethome:
+    description: Con este comando estableces la ubicación de tu casa
+    usage: /<command>
+  home:
+    description: Con este comando vuelves a casa
+    usage: /<command>
+  delhome:
+    description: Con este comando borras las casas asignadas
+    usage: /<command>

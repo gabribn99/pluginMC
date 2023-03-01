@@ -21,8 +21,8 @@ public class Home implements CommandExecutor {
                     player.sendMessage(ChatColor.LIGHT_PURPLE + "Volviendo a casa...");
                 } else {
                     location = player.getBedSpawnLocation();
-                    player.sendMessage(ChatColor.LIGHT_PURPLE + "Volviendo a la cama...");
                     if (location != null) {
+                        player.sendMessage(ChatColor.LIGHT_PURPLE + "Volviendo a la cama...");
                         player.teleport(location);
                     } else player.sendMessage(ChatColor.RED + "No tienes cama ni home asignado");
                 }

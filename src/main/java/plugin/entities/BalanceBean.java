@@ -1,4 +1,4 @@
-package gabriel.entities;
+package plugin.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

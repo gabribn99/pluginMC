@@ -58,4 +58,22 @@ public class MyRecipes {
         recipe.setIngredient('B',Material.SLIME_BLOCK);
         return recipe;
     }
+
+    public ShapedRecipe getStickOfDOOM() {
+        ItemStack item = new ItemStack(Material.STICK);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.RED + "Stick of Doom");
+        item.setItemMeta(meta);
+
+        NamespacedKey key = new NamespacedKey(plugin, "doom_stick");
+        ShapedRecipe recipe = new ShapedRecipe(key, item);
+
+        recipe.shape(" F ","ESN");
+        recipe.setIngredient('F',Material.WITHER_ROSE);
+        recipe.setIngredient('E',Material.ENDER_PEARL);
+        recipe.setIngredient('S',Material.STICK);
+        recipe.setIngredient('N',Material.NETHER_STAR);
+
+        return recipe;
+    }
 }

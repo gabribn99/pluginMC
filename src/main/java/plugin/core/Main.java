@@ -51,6 +51,7 @@ public final class Main extends JavaPlugin {
         recipes.add(myRecipes.getEmeraldSword());
         recipes.add(myRecipes.getSaddle());
         recipes.add(myRecipes.getKnockbackStick());
+        recipes.add(myRecipes.getStickOfDOOM());
 
         recipes.forEach(recipe -> Bukkit.addRecipe(recipe));
     }

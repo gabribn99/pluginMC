@@ -4,17 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bukkit.*;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import plugin.adapters.LocationAdapter;
 import plugin.commands.*;
 import plugin.entities.BalanceBean;
 import plugin.entities.LocationBean;
 import plugin.entities.TPBean;
-import plugin.events.PlayerJoinQuit;
+import plugin.events.*;
 import plugin.recipes.MyRecipes;
 
 import java.io.*;
@@ -75,6 +72,7 @@ public final class Main extends JavaPlugin {
 
     private void setEvents() {
         getServer().getPluginManager().registerEvents(new PlayerJoinQuit(), this);
+        getServer().getPluginManager().registerEvents(new OnClickItem(), this);
     }
 
     private void saveHomes() {

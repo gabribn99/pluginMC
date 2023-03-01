@@ -1,7 +1,7 @@
-package gabriel.commands;
+package plugin.commands;
 
-import gabriel.core.Main;
-import gabriel.entities.TPBean;
+import plugin.core.Main;
+import plugin.entities.TPBean;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

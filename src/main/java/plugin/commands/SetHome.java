@@ -1,6 +1,6 @@
-package gabriel.commands;
+package plugin.commands;
 
-import gabriel.core.Main;
+import plugin.core.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

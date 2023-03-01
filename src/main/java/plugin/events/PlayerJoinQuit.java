@@ -1,4 +1,4 @@
-package gabriel.events;
+package plugin.events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;

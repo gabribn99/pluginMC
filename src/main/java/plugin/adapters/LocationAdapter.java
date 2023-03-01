@@ -1,10 +1,10 @@
-package gabriel.adapters;
+package plugin.adapters;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import gabriel.entities.LocationBean;
+import plugin.entities.LocationBean;
 
 import java.io.IOException;
 

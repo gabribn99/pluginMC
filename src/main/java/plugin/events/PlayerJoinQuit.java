@@ -1,7 +1,7 @@
 package plugin.events;
 
-import gabriel.core.Main;
-import gabriel.entities.BalanceBean;
+import plugin.core.Main;
+import plugin.entities.BalanceBean;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

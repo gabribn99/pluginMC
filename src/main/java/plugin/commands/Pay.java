@@ -1,7 +1,7 @@
-package gabriel.commands;
+package plugin.commands;
 
-import gabriel.core.Main;
-import gabriel.entities.BalanceBean;
+import plugin.core.Main;
+import plugin.entities.BalanceBean;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

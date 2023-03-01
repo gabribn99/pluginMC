@@ -10,7 +10,7 @@ public class OnClickItem implements Listener {
     public void Entrada(EntityDamageByEntityEvent event) {
 		 if(event.getDamager() instanceof Player) {
 			Player atacante = (Player) event.getDamager();
-			event.getCause().toString();
+			System.out.println( event.getEntity().toString());
 			atacante.sendMessage("Has golpeado");
 			
 		}

@@ -52,7 +52,9 @@ public final class Main extends JavaPlugin {
         getCommand("home").setExecutor(new Home());
         getCommand("sethome").setExecutor(new SetHome());
         getCommand("delhome").setExecutor(new DelHome());
+        getCommand("cambiarbloque").setExecutor(new CambioBloque());
     }
+    
     private void saveHomes() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(LocationBean.class, new LocationAdapter());

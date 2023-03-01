@@ -17,6 +17,7 @@ public class CambioBloque implements CommandExecutor {
 		Location location= new Location(Main.server.getWorld("world"), 0, 0, 0);
 		Block block = location.getBlock();
 		String blockData= block.getBlockData().getAsString();
+		System.out.println(blockData);
 		Main.server.createBlockData(blockData);
 		return false;
 	}

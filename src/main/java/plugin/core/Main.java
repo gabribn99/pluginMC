@@ -11,7 +11,7 @@ import plugin.commands.*;
 import plugin.entities.BalanceBean;
 import plugin.entities.LocationBean;
 import plugin.entities.TPBean;
-import plugin.events.PlayerJoinQuit;
+import plugin.events.*;
 import plugin.recipes.MyRecipes;
 
 import java.io.*;
@@ -67,10 +67,12 @@ public final class Main extends JavaPlugin {
         getCommand("balance").setExecutor(new Balance());
         getCommand("pay").setExecutor(new Pay());
         getCommand("cambiarbloque").setExecutor(new CambioBloque());
+        getCommand("beacon").setExecutor(new Beacon());
     }
 
     private void setEvents() {
         getServer().getPluginManager().registerEvents(new PlayerJoinQuit(), this);
+        getServer().getPluginManager().registerEvents(new OnClickItem(), this);
     }
 
     private void saveHomes() {

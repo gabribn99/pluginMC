@@ -45,3 +45,6 @@ commands:
   cambiarbloque:
     description: Con este comando cambias un bloque a diamante.
     usage: /<command>
+  beacon:
+    description: Con este comando creas un beacon.
+    usage: /<command>

@@ -1,15 +1,17 @@
-package gabriel.core;
+package plugin.core;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import gabriel.adapters.LocationAdapter;
-import gabriel.commands.*;
-import gabriel.entities.BalanceBean;
-import gabriel.entities.LocationBean;
-import gabriel.entities.TPBean;
-import gabriel.events.PlayerJoinQuit;
+
+import plugin.adapters.LocationAdapter;
+import plugin.commands.*;
+import plugin.entities.LocationBean;
+import plugin.entities.TPBean;
+import plugin.events.PlayerJoinQuit;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,9 +28,11 @@ public final class Main extends JavaPlugin {
     public static Map<String, TPBean> mapTps = new HashMap<>();
     public static Map<String, Location> mapHomes = new HashMap<>();
     public static Map<String, BalanceBean> mapBalances = new HashMap<>();
-
+    public static Server server;
+    
     @Override
     public void onEnable() {
+        server = getServer();
         loadHomes();
         setCommands();
         setEvents();
@@ -52,6 +56,7 @@ public final class Main extends JavaPlugin {
         getCommand("delhome").setExecutor(new DelHome());
         getCommand("balance").setExecutor(new Balance());
         getCommand("pay").setExecutor(new Pay());
+        getCommand("cambiarbloque").setExecutor(new CambioBloque());
     }
 
     private void setEvents() {

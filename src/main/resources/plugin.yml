@@ -1,6 +1,6 @@
 name: PruebaPlugin
 version: '${project.version}'
-main: gabriel.core.Main
+main: plugin.core.Main
 api-version: 1.19
 commands:
   heal:
@@ -42,3 +42,6 @@ commands:
     usage: /<command>
     aliases:
       - pagar
+  cambiarbloque:
+    description: Con este comando cambias un bloque a diamante.
+    usage: /<command>

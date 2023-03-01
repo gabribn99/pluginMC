@@ -1,4 +1,4 @@
-package gabriel.events;
+package plugin.events;
 
 import gabriel.core.Main;
 import gabriel.entities.BalanceBean;

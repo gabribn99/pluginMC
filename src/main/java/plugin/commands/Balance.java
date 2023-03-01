@@ -14,7 +14,7 @@ public class Balance implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             double amount = Main.mapBalances.get(player.getName()).getAmount();
-            player.sendMessage(ChatColor.GOLD + "Tu saldo actual es: " + ChatColor.WHITE + amount + "€");
+            player.sendMessage(ChatColor.GOLD + "Tu saldo actual es: " + ChatColor.WHITE + amount + "₱");
         }
         return false;
     }

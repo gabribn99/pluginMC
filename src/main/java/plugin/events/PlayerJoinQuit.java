@@ -18,7 +18,7 @@ public class PlayerJoinQuit implements Listener {
             Thread.sleep(1000);
             double amount = 10; //Este dato deberá cargar de un json
             Main.mapBalances.put(event.getPlayer().getName(), new BalanceBean(event.getPlayer().getName(), amount));
-            event.getPlayer().sendMessage(ChatColor.GOLD + "Tu saldo actual es: " + ChatColor.WHITE + amount + "€");
+            event.getPlayer().sendMessage(ChatColor.GOLD + "Tu saldo actual es: " + ChatColor.WHITE + amount + "₱");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

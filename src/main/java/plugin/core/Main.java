@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bukkit.*;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import plugin.adapters.LocationAdapter;
 import plugin.commands.*;
@@ -53,7 +50,7 @@ public final class Main extends JavaPlugin {
         List<ShapedRecipe> recipes = new ArrayList<>();
         recipes.add(myRecipes.getEmeraldSword());
         recipes.add(myRecipes.getSaddle());
-        recipes.add(myRecipes.getCouriousStick());
+        recipes.add(myRecipes.getKnockbackStick());
 
         recipes.forEach(recipe -> Bukkit.addRecipe(recipe));
     }

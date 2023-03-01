@@ -43,19 +43,19 @@ public class MyRecipes {
         return recipe;
     }
 
-    public ShapedRecipe getCouriousStick() {
+    public ShapedRecipe getKnockbackStick() {
         ItemStack item = new ItemStack(Material.STICK);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.DARK_PURPLE + "Courious Stick");
+        meta.setDisplayName(ChatColor.DARK_PURPLE + "Knockback Stick");
         item.setItemMeta(meta);
         item.addUnsafeEnchantment(Enchantment.KNOCKBACK, 400);
 
-        NamespacedKey key = new NamespacedKey(plugin, "courious_stick");
+        NamespacedKey key = new NamespacedKey(plugin, "knockback_stick");
         ShapedRecipe recipe = new ShapedRecipe(key, item);
 
-        recipe.shape(" P "," S ");
+        recipe.shape(" B ","BSB", " B ");
         recipe.setIngredient('S',Material.STICK);
-        recipe.setIngredient('P',Material.POISONOUS_POTATO);
+        recipe.setIngredient('B',Material.SLIME_BLOCK);
         return recipe;
     }
 }

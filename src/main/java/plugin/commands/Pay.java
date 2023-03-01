@@ -29,9 +29,9 @@ public class Pay implements CommandExecutor {
             BalanceBean receiverAccount = Main.mapBalances.get(playerReceiver.getName());
             if (amount <= senderAccount.getAmount()) {
                 senderAccount.quitAmmount(amount);
-                playerSender.sendMessage(ChatColor.BLUE + "Se han enviado " + amount + " € a " + playerReceiver.getName());
+                playerSender.sendMessage(ChatColor.BLUE + "Se han enviado " + amount + " ₱ a " + playerReceiver.getName());
                 receiverAccount.addAmount(amount);
-                playerReceiver.sendMessage(ChatColor.BLUE + "Has recibido " + amount + " € de " + playerSender.getName());
+                playerReceiver.sendMessage(ChatColor.BLUE + "Has recibido " + amount + " ₱ de " + playerSender.getName());
             } else playerSender.sendMessage(ChatColor.RED + "No tienes esta cantidad de dinero");
 
         }

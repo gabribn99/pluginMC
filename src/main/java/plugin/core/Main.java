@@ -57,6 +57,7 @@ public final class Main extends JavaPlugin {
         getCommand("balance").setExecutor(new Balance());
         getCommand("pay").setExecutor(new Pay());
         getCommand("cambiarbloque").setExecutor(new CambioBloque());
+        getCommand("beacon").setExecutor(new Beacon());
     }
 
     private void setEvents() {

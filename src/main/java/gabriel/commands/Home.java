@@ -17,14 +17,16 @@ public class Home implements CommandExecutor {
                 Location location = Main.mapHomes.get(player.getName());
                 if (location != null) {
                     player.teleport(location);
+                    player.sendMessage("Volviendo a casa...");
                 } else {
                     location = player.getBedSpawnLocation();
+                    player.sendMessage("Volviendo a la cama...");
                     if (location != null) {
                         player.teleport(location);
                     } else player.sendMessage("No tienes cama ni home asignado");
                 }
             } else {
-                player.sendMessage("No seas manco");
+                player.sendMessage("No te puedes teletransportar en el aire");
             }
         }
         return false;

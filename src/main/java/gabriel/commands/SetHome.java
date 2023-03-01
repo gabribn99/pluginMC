@@ -14,7 +14,8 @@ public class SetHome implements CommandExecutor {
             Player player = (Player) sender;
             if(!player.isFlying()) {
                 Main.mapHomes.put(player.getName(),player.getLocation());
-            }
+                player.sendMessage("Casa establecida");
+            } else player.sendMessage("Necesitas estar en el suelo para establecer tu casa");
         }
         return false;
     }

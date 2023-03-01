@@ -14,6 +14,7 @@ public class DelHome implements CommandExecutor {
             Player player = (Player) sender;
             try {
                 Main.mapHomes.remove(player.getName());
+                player.sendMessage("Has borrado tu casa asignada");
             } catch (Exception e) {
                 player.sendMessage("No tienes un home asignado");
             }

@@ -1,4 +1,4 @@
-package gabriel.commands;
+package plugin.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

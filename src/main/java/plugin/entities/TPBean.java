@@ -1,4 +1,4 @@
-package gabriel.entities;
+package plugin.entities;
 
 import lombok.Data;
 import org.bukkit.entity.Player;

@@ -1,14 +1,17 @@
-package gabriel.core;
+package plugin.core;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import gabriel.adapters.LocationAdapter;
-import gabriel.commands.*;
-import gabriel.entities.LocationBean;
-import gabriel.entities.TPBean;
-import gabriel.events.PlayerJoinQuit;
+
+import plugin.adapters.LocationAdapter;
+import plugin.commands.*;
+import plugin.entities.LocationBean;
+import plugin.entities.TPBean;
+import plugin.events.PlayerJoinQuit;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,11 +27,11 @@ public final class Main extends JavaPlugin {
     ConsoleCommandSender mycmd = Bukkit.getConsoleSender();
     public static Map<String, TPBean> mapTps = new HashMap<>();
     public static Map<String, Location> mapHomes = new HashMap<>();
-
+    public static Server server;
     @Override
     public void onEnable() {
         loadHomes();
-
+         server = getServer();
         getServer().getPluginManager().registerEvents(new PlayerJoinQuit(), this);
         setCommands();
 

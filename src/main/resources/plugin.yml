@@ -30,3 +30,15 @@ commands:
   delhome:
     description: Con este comando borras las casas asignadas
     usage: /<command>
+  balance:
+    description: Con este comando ves tu saldo actual
+    usage: /<command>
+    aliases:
+      - money
+      - dinero
+      - saldo
+  pay:
+    description: Con este comando puedes pagar a otro jugador
+    usage: /<command>
+    aliases:
+      - pagar

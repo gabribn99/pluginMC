@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import gabriel.adapters.LocationAdapter;
 import gabriel.commands.*;
+import gabriel.entities.BalanceBean;
 import gabriel.entities.LocationBean;
 import gabriel.entities.TPBean;
 import gabriel.events.PlayerJoinQuit;
@@ -24,14 +25,13 @@ public final class Main extends JavaPlugin {
     ConsoleCommandSender mycmd = Bukkit.getConsoleSender();
     public static Map<String, TPBean> mapTps = new HashMap<>();
     public static Map<String, Location> mapHomes = new HashMap<>();
+    public static Map<String, BalanceBean> mapBalances = new HashMap<>();
 
     @Override
     public void onEnable() {
         loadHomes();
-
-        getServer().getPluginManager().registerEvents(new PlayerJoinQuit(), this);
         setCommands();
-
+        setEvents();
         mycmd.sendMessage("El plugin se ha iniciado");
     }
 
@@ -40,6 +40,7 @@ public final class Main extends JavaPlugin {
         mycmd.sendMessage("El plugin se ha desactivado");
         saveHomes();
     }
+
     private void setCommands() {
         getCommand("heal").setExecutor(new Heal());
         getCommand("tpm").setExecutor(new TPM());
@@ -49,7 +50,14 @@ public final class Main extends JavaPlugin {
         getCommand("home").setExecutor(new Home());
         getCommand("sethome").setExecutor(new SetHome());
         getCommand("delhome").setExecutor(new DelHome());
+        getCommand("balance").setExecutor(new Balance());
+        getCommand("pay").setExecutor(new Pay());
     }
+
+    private void setEvents() {
+        getServer().getPluginManager().registerEvents(new PlayerJoinQuit(), this);
+    }
+
     private void saveHomes() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(LocationBean.class, new LocationAdapter());
@@ -64,7 +72,6 @@ public final class Main extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void loadHomes() {

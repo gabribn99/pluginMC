@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class Home implements CommandExecutor {
@@ -14,7 +15,8 @@ public class Home implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (!player.isFlying()) {
+            LivingEntity le = player;
+            if (le.isOnGround()) {
                 Location location = Main.mapHomes.get(player.getName());
                 if (location != null) {
                     player.teleport(location);

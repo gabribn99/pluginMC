@@ -1,5 +1,6 @@
 package plugin.commands;
 
+import org.bukkit.ChatColor;
 import plugin.core.Main;
 import plugin.entities.TPBean;
 import org.bukkit.command.Command;
@@ -15,11 +16,11 @@ public class TPAccept implements CommandExecutor {
             Player player = (Player) sender;
             TPBean tp = Main.mapTps.get(sender.getName());
             if (tp == null) {
-                player.sendMessage("No tienes ninguna petición de tp pendiente.");
+                player.sendMessage(ChatColor.DARK_AQUA + "No tienes ninguna petición de tp pendiente.");
                 return false;
             }
-            player.sendMessage("Has aceptado la petición de tp, se te está teletransportando...");
-            tp.getSender().sendMessage(player.getName() + " ha aceptado tu solicitud de tp.");
+            player.sendMessage(ChatColor.GOLD + "Has aceptado la petición de tp, se te está teletransportando...");
+            tp.getSender().sendMessage(ChatColor.GOLD + player.getName() + " ha aceptado tu solicitud de tp.");
             tp.getSender().teleport(player);
             Main.mapTps.remove(sender.getName());
         }

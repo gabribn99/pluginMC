@@ -1,6 +1,7 @@
 package plugin.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,10 +19,8 @@ public class Heal implements CommandExecutor {
             }
             playerReceiver.setHealth(20);
             playerReceiver.setFoodLevel(20);
-            playerSender.sendMessage("El jugador " + playerReceiver.getName() + " se ha curado");
-            playerReceiver.sendMessage("El jugador " + playerSender.getName() + " te ha curado");
-        } else {
-            Bukkit.getConsoleSender().sendMessage("Solo para jugadores");
+            playerSender.sendMessage(ChatColor.GREEN + "El jugador " + playerReceiver.getName() + " se ha curado");
+            playerReceiver.sendMessage(ChatColor.GREEN + "El jugador " + playerSender.getName() + " te ha curado");
         }
         return false;
     }

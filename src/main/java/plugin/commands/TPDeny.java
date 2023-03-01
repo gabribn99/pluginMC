@@ -1,5 +1,6 @@
 package plugin.commands;
 
+import org.bukkit.ChatColor;
 import plugin.core.Main;
 import plugin.entities.TPBean;
 import org.bukkit.command.Command;
@@ -15,8 +16,8 @@ public class TPDeny implements CommandExecutor {
             Player player = (Player) sender;
             TPBean tp = Main.mapTps.get(sender.getName());
             Main.mapTps.remove(sender.getName());
-            tp.getSender().sendMessage(player.getName() + " ha rechazado tu petición de tp");
-            player.sendMessage("Has rechazado la petición de tp");
+            tp.getSender().sendMessage(ChatColor.RED + player.getName() + " ha rechazado tu petición de tp");
+            player.sendMessage(ChatColor.DARK_AQUA + "Has rechazado la petición de tp");
         }
         return false;
     }

@@ -1,5 +1,6 @@
 package plugin.commands;
 
+import org.bukkit.ChatColor;
 import plugin.core.Main;
 import plugin.entities.TPBean;
 import org.bukkit.Bukkit;
@@ -15,12 +16,12 @@ public class TPA implements CommandExecutor {
         Player playerSender = (Player) sender;
         Player playerReceiver = (args != null) ? Bukkit.getPlayer(args[0]) : null;
         if (playerReceiver == null) {
-            sender.sendMessage("El comando esta incompleto [Falta el destinatario]");
+            sender.sendMessage(ChatColor.RED + "El comando esta incompleto [Falta el destinatario]");
             return false;
         }
         if (sender instanceof Player) {
-            playerSender.sendMessage("Petición de tp enviada");
-            playerReceiver.sendMessage(playerSender.getName() + " quiere teletransportarse contigo.\n- \"tpaccept\" para aceptar\n- \"tpdeny\" para denegar");
+            playerSender.sendMessage(ChatColor.GOLD + "Petición de tp enviada");
+            playerReceiver.sendMessage(ChatColor.GOLD + playerSender.getName() + " quiere teletransportarse contigo.\n-" + ChatColor.GREEN + " \"tpaccept\" para aceptar\n- " + ChatColor.RED + "\"tpdeny\" para denegar");
             Main.mapTps.put(playerReceiver.getName(), new TPBean(playerSender, playerReceiver));
         }
         return false;

@@ -1,5 +1,6 @@
 package plugin.commands;
 
+import org.bukkit.ChatColor;
 import plugin.core.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,8 +15,8 @@ public class SetHome implements CommandExecutor {
             Player player = (Player) sender;
             if(!player.isFlying()) {
                 Main.mapHomes.put(player.getName(),player.getLocation());
-                player.sendMessage("Casa establecida");
-            } else player.sendMessage("Necesitas estar en el suelo para establecer tu casa");
+                player.sendMessage(ChatColor.GREEN + "Casa establecida");
+            } else player.sendMessage(ChatColor.RED + "Necesitas estar en el suelo para establecer tu casa");
         }
         return false;
     }

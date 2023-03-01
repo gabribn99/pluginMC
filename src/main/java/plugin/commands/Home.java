@@ -1,5 +1,6 @@
 package plugin.commands;
 
+import org.bukkit.ChatColor;
 import plugin.core.Main;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -17,16 +18,16 @@ public class Home implements CommandExecutor {
                 Location location = Main.mapHomes.get(player.getName());
                 if (location != null) {
                     player.teleport(location);
-                    player.sendMessage("Volviendo a casa...");
+                    player.sendMessage(ChatColor.LIGHT_PURPLE + "Volviendo a casa...");
                 } else {
                     location = player.getBedSpawnLocation();
-                    player.sendMessage("Volviendo a la cama...");
+                    player.sendMessage(ChatColor.LIGHT_PURPLE + "Volviendo a la cama...");
                     if (location != null) {
                         player.teleport(location);
-                    } else player.sendMessage("No tienes cama ni home asignado");
+                    } else player.sendMessage(ChatColor.RED + "No tienes cama ni home asignado");
                 }
             } else {
-                player.sendMessage("No te puedes teletransportar en el aire");
+                player.sendMessage(ChatColor.RED + "No te puedes teletransportar en el aire");
             }
         }
         return false;

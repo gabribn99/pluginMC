@@ -1,5 +1,6 @@
 package plugin.commands;
 
+import org.bukkit.ChatColor;
 import plugin.core.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,9 +14,9 @@ public class DelHome implements CommandExecutor {
             Player player = (Player) sender;
             try {
                 Main.mapHomes.remove(player.getName());
-                player.sendMessage("Has borrado tu casa asignada");
+                player.sendMessage(ChatColor.BLUE + "Has borrado tu casa asignada");
             } catch (Exception e) {
-                player.sendMessage("No tienes un home asignado");
+                player.sendMessage(ChatColor.RED + "No tienes un home asignado");
             }
         }
         return false;

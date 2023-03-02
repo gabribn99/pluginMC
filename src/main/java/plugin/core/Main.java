@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bukkit.*;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import plugin.adapters.BalanceAdapter;
 import plugin.adapters.LocationAdapter;
@@ -13,7 +13,8 @@ import plugin.entities.BalanceBean;
 import plugin.entities.LocationBean;
 import plugin.entities.TPBean;
 import plugin.events.*;
-import plugin.recipes.MyRecipes;
+import plugin.recipes.CraftingRecipes;
+import plugin.recipes.SmeltingRecipes;
 
 import java.io.*;
 import java.util.*;
@@ -48,12 +49,18 @@ public final class Main extends JavaPlugin {
     }
 
     private void loadRecipes() {
-        MyRecipes myRecipes = new MyRecipes(this);
-        List<ShapedRecipe> recipes = new ArrayList<>();
-        recipes.add(myRecipes.getEmeraldSword());
-        recipes.add(myRecipes.getSaddle());
-        recipes.add(myRecipes.getKnockbackStick());
-        recipes.add(myRecipes.getStickOfDOOM());
+        CraftingRecipes craftingRecipes = new CraftingRecipes(this);
+        SmeltingRecipes smeltingRecipes = new SmeltingRecipes(this);
+
+        List<Recipe> recipes = new ArrayList<>();
+        recipes.add(craftingRecipes.getEmeraldSword());
+        recipes.add(craftingRecipes.getSaddle());
+        recipes.add(craftingRecipes.getKnockbackStick());
+        recipes.add(craftingRecipes.getStickOfDOOM());
+        recipes.add(smeltingRecipes.getClay());
+        smeltingRecipes.getIngotForTools().forEach(recipe -> {
+            recipes.add(recipe);
+        });
 
         recipes.forEach(recipe -> Bukkit.addRecipe(recipe));
     }
@@ -114,6 +121,7 @@ public final class Main extends JavaPlugin {
             e.printStackTrace();
         }
     }
+
     private void saveBalances() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(BalanceBean.class, new BalanceAdapter());
@@ -121,7 +129,7 @@ public final class Main extends JavaPlugin {
         try {
             PrintWriter pw = new PrintWriter(new FileWriter(PATHBALANCES));
             mapBalances.forEach((playerName, balance) -> {
-                BalanceBean balanceBean = new BalanceBean(balance.getPlayerName(),balance.getAmount());
+                BalanceBean balanceBean = new BalanceBean(balance.getPlayerName(), balance.getAmount());
                 pw.println(gson.toJson(balanceBean));
             });
             pw.close();

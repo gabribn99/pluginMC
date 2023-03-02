@@ -9,10 +9,10 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
-public class MyRecipes {
+public class CraftingRecipes {
     Plugin plugin;
 
-    public MyRecipes(Plugin plugin) {
+    public CraftingRecipes(Plugin plugin) {
         this.plugin = plugin;
     }
 

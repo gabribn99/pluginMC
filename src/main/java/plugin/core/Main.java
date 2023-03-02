@@ -6,6 +6,7 @@ import org.bukkit.*;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
+import plugin.adapters.BalanceAdapter;
 import plugin.adapters.LocationAdapter;
 import plugin.commands.*;
 import plugin.entities.BalanceBean;
@@ -15,24 +16,24 @@ import plugin.events.*;
 import plugin.recipes.MyRecipes;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class Main extends JavaPlugin {
 
     public final static String PATHHOMES = "homes.json";
+    public final static String PATHBALANCES = "balances.json";
     ConsoleCommandSender mycmd = Bukkit.getConsoleSender();
     public static Map<String, TPBean> mapTps = new HashMap<>();
     public static Map<String, Location> mapHomes = new HashMap<>();
     public static Map<String, BalanceBean> mapBalances = new HashMap<>();
+    public static Map<Location, UUID> mapLockedChests = new HashMap<>();
     public static Server server;
 
     @Override
     public void onEnable() {
         server = getServer();
         loadHomes();
+        loadBalances();
         loadRecipes();
         setCommands();
         setEvents();
@@ -43,6 +44,7 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         mycmd.sendMessage("El plugin se ha desactivado");
         saveHomes();
+        saveBalances();
     }
 
     private void loadRecipes() {
@@ -73,7 +75,8 @@ public final class Main extends JavaPlugin {
 
     private void setEvents() {
         getServer().getPluginManager().registerEvents(new PlayerJoinQuit(), this);
-        getServer().getPluginManager().registerEvents(new OnClickItem(), this);
+        getServer().getPluginManager().registerEvents(new HitPlayer(), this);
+        getServer().getPluginManager().registerEvents(new LockChest(), this);
     }
 
     private void saveHomes() {
@@ -111,4 +114,39 @@ public final class Main extends JavaPlugin {
             e.printStackTrace();
         }
     }
+    private void saveBalances() {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(BalanceBean.class, new BalanceAdapter());
+        Gson gson = builder.create();
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter(PATHBALANCES));
+            mapBalances.forEach((playerName, balance) -> {
+                BalanceBean balanceBean = new BalanceBean(balance.getPlayerName(),balance.getAmount());
+                pw.println(gson.toJson(balanceBean));
+            });
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadBalances() {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(BalanceBean.class, new BalanceAdapter());
+        Gson gson = builder.create();
+        List<BalanceBean> balanceBeanList = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(PATHBALANCES));
+            String jsonString;
+            while ((jsonString = br.readLine()) != null) {
+                balanceBeanList.add(gson.fromJson(jsonString, BalanceBean.class));
+            }
+            balanceBeanList.forEach(balanceBean -> {
+                mapBalances.put(balanceBean.getPlayerName(), balanceBean);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

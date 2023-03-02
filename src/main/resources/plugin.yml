@@ -37,6 +37,8 @@ commands:
       - money
       - dinero
       - saldo
+      - bal
+      - wallet
   pay:
     description: Con este comando puedes pagar a otro jugador
     usage: /<command>

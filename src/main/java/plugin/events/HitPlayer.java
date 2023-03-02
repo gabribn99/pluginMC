@@ -12,11 +12,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import utils.Utils;
 
-import java.util.Random;
-
-public class OnClickItem implements Listener {
+public class HitPlayer implements Listener {
     @EventHandler
-    public void Entrada(EntityDamageByEntityEvent event) {
+    public void entrada(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
             ItemStack itemInHand = ((Player) event.getDamager()).getInventory().getItemInMainHand();
             ItemMeta meta = itemInHand.getItemMeta();
@@ -39,7 +37,7 @@ public class OnClickItem implements Listener {
             switch (dice) {
                 case 1:
                     damager.teleport(new Location(world, 0, -150, 0));
-                    damager.sendMessage(ChatColor.DARK_RED + "El destino ha decidido que castigarte por abusar del poder que se te ha concedido");
+                    damager.sendMessage(ChatColor.DARK_RED + "El destino ha decidido castigarte por abusar del poder que se te ha concedido");
                     break;
                 case 6:
                     damaged.teleport(new Location(world, 0, -150, 0));

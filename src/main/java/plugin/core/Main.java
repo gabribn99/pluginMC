@@ -7,9 +7,11 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import plugin.adapters.BalanceAdapter;
+import plugin.adapters.ChestLockerAdapter;
 import plugin.adapters.LocationAdapter;
 import plugin.commands.*;
 import plugin.entities.BalanceBean;
+import plugin.entities.ChestLockerBean;
 import plugin.entities.LocationBean;
 import plugin.entities.TPBean;
 import plugin.events.*;
@@ -17,17 +19,19 @@ import plugin.recipes.CraftingRecipes;
 import plugin.recipes.SmeltingRecipes;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 public final class Main extends JavaPlugin {
 
-    public final static String PATHHOMES = "homes.json";
-    public final static String PATHBALANCES = "balances.json";
+    public final static String PATHHOMES = "mappers/homes.json";
+    public final static String PATHBALANCES = "mappers/balances.json";
+    public final static String PATHCHESTLOCKERS = "mappers/chestLockers.json";
     ConsoleCommandSender mycmd = Bukkit.getConsoleSender();
     public static Map<String, TPBean> mapTps = new HashMap<>();
     public static Map<String, Location> mapHomes = new HashMap<>();
     public static Map<String, BalanceBean> mapBalances = new HashMap<>();
-    public static Map<Location, UUID> mapLockedChests = new HashMap<>();
+    public static Map<Location, String> mapLockedChests = new HashMap<>();
     public static Server server;
 
     @Override
@@ -35,6 +39,7 @@ public final class Main extends JavaPlugin {
         server = getServer();
         loadHomes();
         loadBalances();
+        loadChestLocks();
         loadRecipes();
         setCommands();
         setEvents();
@@ -46,6 +51,7 @@ public final class Main extends JavaPlugin {
         mycmd.sendMessage("El plugin se ha desactivado");
         saveHomes();
         saveBalances();
+        saveChestLocks();
     }
 
     private void loadRecipes() {
@@ -58,9 +64,6 @@ public final class Main extends JavaPlugin {
         recipes.add(craftingRecipes.getKnockbackStick());
         recipes.add(craftingRecipes.getStickOfDOOM());
         recipes.add(smeltingRecipes.getClay());
-        smeltingRecipes.getIngotForTools().forEach(recipe -> {
-            recipes.add(recipe);
-        });
 
         recipes.forEach(recipe -> Bukkit.addRecipe(recipe));
     }
@@ -83,7 +86,7 @@ public final class Main extends JavaPlugin {
     private void setEvents() {
         getServer().getPluginManager().registerEvents(new PlayerJoinQuit(), this);
         getServer().getPluginManager().registerEvents(new HitPlayer(), this);
-        getServer().getPluginManager().registerEvents(new LockChest(), this);
+        getServer().getPluginManager().registerEvents(new ChestLocker(), this);
     }
 
     private void saveHomes() {
@@ -118,7 +121,7 @@ public final class Main extends JavaPlugin {
                 mapHomes.put(locationBean.getPlayerName(), location);
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Aun no existe el fichero \"" + PATHHOMES + "\"");
         }
     }
 
@@ -153,7 +156,45 @@ public final class Main extends JavaPlugin {
                 mapBalances.put(balanceBean.getPlayerName(), balanceBean);
             });
         } catch (IOException e) {
+            System.out.println("Aun no existe el fichero \"" + PATHBALANCES + "\"");
+        }
+    }
+
+    private void saveChestLocks() {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(ChestLockerBean.class, new ChestLockerAdapter());
+        Gson gson = builder.create();
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter(PATHCHESTLOCKERS));
+            mapLockedChests.forEach((chestlocker, playerId) -> {
+                ChestLockerBean chestLocker = new ChestLockerBean(playerId, chestlocker.getWorld().getName(), chestlocker.getX(), chestlocker.getY(), chestlocker.getZ());
+                pw.println(gson.toJson(chestLocker));
+            });
+            pw.close();
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void loadChestLocks() {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(ChestLockerBean.class, new ChestLockerAdapter());
+        Gson gson = builder.create();
+        List<ChestLockerBean> chestLockerBeanList = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(PATHCHESTLOCKERS));
+            String jsonString;
+            while ((jsonString = br.readLine()) != null) {
+                chestLockerBeanList.add(gson.fromJson(jsonString, ChestLockerBean.class));
+            }
+            chestLockerBeanList.forEach(chestLocker -> {
+                World world = Bukkit.getWorld(chestLocker.getWorldName());
+                Location location = new Location(world, chestLocker.getX(), chestLocker.getY(), chestLocker.getZ());
+                String playerName = chestLocker.getPlayerName();
+                mapLockedChests.put(location, playerName);
+            });
+        } catch (IOException e) {
+            System.out.println("Aun no existe el fichero \"" + PATHCHESTLOCKERS + "\"");
         }
     }
 
